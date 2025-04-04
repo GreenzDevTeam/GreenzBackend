@@ -1,0 +1,67 @@
+syntax = "proto3";
+package com.greenz.greenzbackend;
+option java_multiple_files = true;
+option java_outer_classname = "InventoryProto";
+
+import "google/protobuf/empty.proto";
+service InventoryService{
+
+  rpc getAllInventory(google.protobuf.Empty) returns (ListInventoryResponse);
+  rpc getInventoryById(inventoryRequestId) returns (InventoryItem);
+  rpc getInventoryByName(inventoryName) returns (InventoryItem);
+
+  rpc createInventory(inventoryRequest) returns (InventoryItem);
+
+  rpc updateInventory(InventoryItem) returns (InventoryItem);
+
+  rpc deleteInventory(inventoryRequestId) returns (deleteInventoryResponse);
+
+}
+
+message InventoryItem{
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  float price = 4;
+  int64 quantity = 5;
+  float stock = 6;
+  string unit = 7;
+  string tag = 8;
+  string url = 9;
+  string discount = 10;
+  string category = 11;
+  string offer = 12;
+}
+
+message ListInventoryResponse{
+  repeated InventoryItem inventories = 1;
+}
+
+message inventoryRequest{
+  string name = 1;
+  string description = 2;
+  float price = 3;
+  int64 quantity = 4;
+  float stock = 5;
+  string unit = 6;
+  string imageUrl = 8;
+  string offer = 9;
+  string discount = 10;
+  string tag = 11;
+}
+
+message inventoryRequestId{
+  string id = 1;
+}
+
+message deleteInventoryResponse{
+  bool deleteStatus = 1;
+}
+
+message inventoryName{
+  string name = 1;
+}
+
+message categoryName{
+  string categoryName = 1;
+}

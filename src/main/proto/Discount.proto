@@ -1,0 +1,46 @@
+syntax = "proto3";
+package com.greenz.greenzbackend;
+option java_multiple_files = true;
+
+import "google/protobuf/empty.proto";
+
+service DiscountService {
+  rpc getAllDiscounts(google.protobuf.Empty) returns (DiscountListResponse);
+  rpc getDiscountById(discountRequestId) returns (discountItem);
+  rpc getDiscountByName(discountRequestName) returns (discountItem);
+
+  rpc createDiscount(discountCreateRequest) returns (discountItem);
+  rpc updateDiscount(discountItem) returns (discountItem);
+  rpc deleteDiscount(discountRequestId) returns (discountDeleteStatus);
+}
+
+message discountItem {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  double percentage = 4;
+  string applicableOn = 5; // e.g., category, product, etc.
+}
+
+message DiscountListResponse {
+  repeated discountItem discounts = 1;
+}
+
+message discountRequestId {
+  string id = 1;
+}
+
+message discountRequestName {
+  string name = 1;
+}
+
+message discountCreateRequest {
+  string name = 1;
+  string description = 2;
+  double percentage = 3;
+  string applicableOn = 4;
+}
+
+message discountDeleteStatus {
+  bool deleteStatus = 1;
+}

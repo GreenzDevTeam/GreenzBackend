@@ -1,0 +1,25 @@
+syntax = "proto3";
+package com.greenz.greenzbackend;
+option java_multiple_files = true;
+
+
+service CustomerService{
+  rpc sendOTP(OTPrequest) returns (OTPresponse);
+  rpc verifyOTP(verificationRequest) returns (verificationResponse);
+}
+
+message OTPrequest{
+  string mobileNumber = 1;
+}
+
+message OTPresponse{
+  string OTP = 1;
+}
+
+message verificationRequest{
+  string OTP = 1;
+}
+
+message verificationResponse{
+  bool valid = 1;
+}
